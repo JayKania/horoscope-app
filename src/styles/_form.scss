@@ -1,0 +1,85 @@
+form {
+  max-width: 500px;
+  margin: 10rem auto;
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 10px;
+  padding: 3rem 2rem;
+  color: white;
+  box-shadow: 5px 5px 10px 2px #0d2444;
+  background: #040d19;
+  h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 400;
+    font-size: 2rem;
+    // color: rgb(104, 104, 104);
+  }
+  .input-text {
+    #username {
+      width: 100%;
+      background: #071426;
+      color: white;
+    }
+  }
+  .user-err,
+  .email-err,
+  .day-err,
+  .signs-err {
+    color: #962125;
+  }
+  p {
+    margin-top: 2rem;
+    // color: rgb(104, 104, 104);
+    font-weight: 500;
+  }
+  .days {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+    div {
+      border: 1px solid rgb(189, 189, 189);
+      border-radius: 5px;
+      padding: 0.7rem 0.7rem;
+      transition: all 0.3s ease;
+      // color: rgb(104, 104, 104);
+      background: #071426;
+      &:hover {
+        cursor: pointer;
+        background: #d5dcfd;
+        color: black;
+      }
+      &.active {
+        background: #91a3fb;
+        color: black;
+      }
+    }
+  }
+  @import url("./_signs.scss");
+  .email {
+    margin-top: 2rem;
+    #email {
+      width: 100%;
+      color: white;
+      background: #071426;
+    }
+  }
+  .submit {
+    text-align: center;
+    input[type="submit"] {
+      width: 100%;
+      border: none;
+      padding: 0.7rem;
+      margin-top: 2rem;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      background: #91a3fb;
+      color: black;
+      transition: all 0.3s ease;
+      &:hover {
+        cursor: pointer;
+        background: #6e86ff;
+      }
+    }
+  }
+}
