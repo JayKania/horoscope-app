@@ -28,4 +28,13 @@ $resultcolor: rgb(189, 189, 189);
       cursor: pointer;
     }
   }
+  @media screen and (max-width: 480px) {
+    .p-inputtextarea,
+    .p-inputtext {
+      font-size: 0.9rem;
+    }
+    label {
+      font-size: 0.9rem;
+    }
+  }
 }

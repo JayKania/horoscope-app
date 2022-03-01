@@ -35,7 +35,7 @@ const ResultCard = ({ data, name, sign, resultRef, formRef, setData }) => {
       <div className="result-field result-desc">
         <label htmlFor="desc">Description:</label>
         <InputTextarea
-          //   rows={6}
+          rows={5}
           autoResize
           id="desc"
           value={data.description}
