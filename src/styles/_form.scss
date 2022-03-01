@@ -1,14 +1,9 @@
+$formcolor: rgb(189, 189, 189);
+
+@import url("../styles/_generealcardstyles.scss");
 form {
-  max-width: 500px;
-  margin: 5rem auto;
-  border: 1px solid rgb(189, 189, 189);
-  border-radius: 10px;
-  padding: 3rem 2rem;
-  color: white;
-  box-shadow: 5px 5px 10px 2px #0d2444;
-  background: #040d19;
-  transition: all 0.3s ease;
-  &.active {
+  &.form-active {
+    display: none;
     transform: translateY(-150%);
   }
   header {
@@ -78,10 +73,10 @@ form {
     }
   }
   .p-button {
+    margin-top: 2rem;
     width: 100%;
     border: none;
     padding: 0.7rem;
-    margin-top: 2rem;
     border-radius: 5px;
     font-size: 1.1rem;
     background: #6d81e6;
@@ -92,18 +87,5 @@ form {
       cursor: pointer;
       background: #687ad3;
     }
-  }
-  @media screen and (max-width: 480px) {
-    margin: 0;
-    padding: 3rem 1.5rem;
-    border-radius: 0;
-    border: none;
-    header {
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
-  }
-  @media screen and (max-width: 320px) {
   }
 }

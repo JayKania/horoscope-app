@@ -1,0 +1,31 @@
+$resultcolor: rgb(189, 189, 189);
+@import url("../styles/_generealcardstyles.scss");
+
+#result {
+  h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 400;
+    font-size: 2rem;
+  }
+  .p-inputtextarea,
+  .p-inputtext {
+    text-transform: capitalize;
+    background-color: #071426;
+    color: white;
+    opacity: 0.8;
+    flex-basis: 70%;
+  }
+  .result-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  .back-button {
+    width: fit-content;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

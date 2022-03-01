@@ -1,0 +1,40 @@
+$bordercolor: rgb(189, 189, 189);
+$boxShadowColor: #0d2444;
+$formBackgroundColor: #040d19;
+
+.general-card {
+  max-width: 500px;
+  margin: 5rem auto;
+  border: 1px solid $bordercolor;
+  border-radius: 10px;
+  padding: 3rem 2rem;
+  color: white;
+  box-shadow: 5px 5px 10px 2px $boxShadowColor;
+  background: $formBackgroundColor;
+  transition: all 0.3s ease;
+  @media screen and (max-width: 480px) {
+    margin: 0;
+    padding: 3rem 1.5rem;
+    border-radius: 0;
+    border: none;
+    height: 100%;
+    background: linear-gradient(
+      to bottom right,
+      #0e1c2b,
+      #071426,
+      #0e1c2b,
+      #071426
+    );
+    header {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  @media screen and (max-width: 480px) {
+    min-height: 100vh;
+  }
+  @media screen and (max-width: 320px) {
+    height: fit-content;
+  }
+}

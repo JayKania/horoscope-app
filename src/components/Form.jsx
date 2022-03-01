@@ -19,9 +19,17 @@ import virgo from "../assets/virgo.png";
 
 import zodiac from "../assets/zodiac.png";
 
-const Form = () => {
+const Form = ({
+  data,
+  setData,
+  username,
+  setUserName,
+  selectedSign,
+  setSelectedSign,
+  formRef,
+}) => {
   //state
-  const [username, setUserName] = useState("");
+
   const [email, setEmail] = useState("");
   const [day, setDay] = useState("");
   const [signs, setSigns] = useState([
@@ -39,8 +47,6 @@ const Form = () => {
     { name: "virgo", logo: virgo, active: false },
   ]);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(null);
-  const [selectedSign, setSelectedSign] = useState("");
 
   // errors
   const [userError, setUserError] = useState(false);
@@ -138,7 +144,12 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={submitHandler} className={`${data ? "active" : null}`}>
+    // className={`${data ? "active" : null}`}
+    <form
+      onSubmit={submitHandler}
+      className={`general-card ${data ? "form-active" : null}`}
+      ref={formRef}
+    >
       <header>
         <h2>Find your Horoscope</h2>
         <img src={zodiac} alt="" />
@@ -150,6 +161,7 @@ const Form = () => {
           onChange={inputHandler}
           ref={userRef}
           className={`${userError ? "p-invalid" : ""}`}
+          autoComplete={false}
         />
         <label htmlFor="username">Username</label>
       </div>
@@ -173,6 +185,7 @@ const Form = () => {
           onChange={inputHandler}
           ref={emailRef}
           className={`${emailError ? "p-invalid" : ""}`}
+          autoComplete={false}
         />
         <label htmlFor="email">Email id</label>
       </div>

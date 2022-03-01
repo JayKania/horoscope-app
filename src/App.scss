@@ -1,3 +1,6 @@
-* {
+#app {
   @import url("./styles/_form.scss");
+  @import url("./styles/_result.scss");
+  height: fit-content;
+  transition: all 0.3s ease;
 }

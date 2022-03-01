@@ -6,7 +6,7 @@
   gap: 1rem;
   justify-content: space-between;
   .sign {
-    flex-basis: 30%;
+    flex-basis: 22%;
     border: 1px solid rgb(189, 189, 189);
     border-radius: 5px;
     padding: 1rem;
@@ -29,6 +29,9 @@
     }
   }
   @media screen and (max-width: 480px) {
+    .sign {
+      flex-basis: 30%;
+    }
   }
   @media screen and (max-width: 360px) {
     gap: 0.5rem;
