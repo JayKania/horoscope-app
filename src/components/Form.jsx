@@ -27,25 +27,39 @@ const Form = ({
   selectedSign,
   setSelectedSign,
   formRef,
+  email,
+  setEmail,
+  day,
+  setDay,
 }) => {
   //state
 
-  const [email, setEmail] = useState("");
-  const [day, setDay] = useState("");
-  const [signs, setSigns] = useState([
-    { name: "aquarius", logo: aquarius, active: false },
-    { name: "aries", logo: aries, active: false },
-    { name: "cancer", logo: cancer, active: false },
-    { name: "capricorn", logo: capricorn, active: false },
-    { name: "gemini", logo: gemini, active: false },
-    { name: "leo", logo: leo, active: false },
-    { name: "libra", logo: libra, active: false },
-    { name: "pisces", logo: pisces, active: false },
-    { name: "sagittarius", logo: sagittarius, active: false },
-    { name: "scorpio", logo: scorpio, active: false },
-    { name: "taurus", logo: taurus, active: false },
-    { name: "virgo", logo: virgo, active: false },
-  ]);
+  const [signs, setSigns] = useState(() => {
+    const signsArray = [
+      { name: "aquarius", logo: aquarius, active: false },
+      { name: "aries", logo: aries, active: false },
+      { name: "cancer", logo: cancer, active: false },
+      { name: "capricorn", logo: capricorn, active: false },
+      { name: "gemini", logo: gemini, active: false },
+      { name: "leo", logo: leo, active: false },
+      { name: "libra", logo: libra, active: false },
+      { name: "pisces", logo: pisces, active: false },
+      { name: "sagittarius", logo: sagittarius, active: false },
+      { name: "scorpio", logo: scorpio, active: false },
+      { name: "taurus", logo: taurus, active: false },
+      { name: "virgo", logo: virgo, active: false },
+    ];
+    if (selectedSign) {
+      signsArray.map((sign) => {
+        if (sign.name === selectedSign.toLowerCase()) {
+          sign.active = true;
+        }
+      });
+      return signsArray;
+    } else {
+      return signsArray;
+    }
+  });
   const [loading, setLoading] = useState(false);
 
   // errors
@@ -72,7 +86,7 @@ const Form = ({
     }
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     if (!userRef.current.value) {
       setUserError(true);
@@ -103,7 +117,7 @@ const Form = ({
       },
     };
 
-    axios
+    await axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
@@ -161,19 +175,34 @@ const Form = ({
           onChange={inputHandler}
           ref={userRef}
           className={`${userError ? "p-invalid" : ""}`}
-          autoComplete={false}
+          autoComplete="off"
         />
         <label htmlFor="username">Username</label>
       </div>
       {userError ? <div className="user-err">Invalid username.</div> : null}
       <div className="days">
-        <div id="yesterday" ref={yesterdayRef} onClick={dayHandler}>
+        <div
+          id="yesterday"
+          ref={yesterdayRef}
+          onClick={dayHandler}
+          className={`${day === "yesterday" ? "active" : ""}`}
+        >
           Yesterday
         </div>
-        <div id="today" ref={todayRef} onClick={dayHandler}>
+        <div
+          id="today"
+          ref={todayRef}
+          onClick={dayHandler}
+          className={`${day === "today" ? "active" : ""}`}
+        >
           Today
         </div>
-        <div id="tomorrow" ref={tomorrowRef} onClick={dayHandler}>
+        <div
+          id="tomorrow"
+          ref={tomorrowRef}
+          onClick={dayHandler}
+          className={`${day === "tomorrow" ? "active" : ""}`}
+        >
           Tomorrow
         </div>
       </div>
@@ -185,7 +214,7 @@ const Form = ({
           onChange={inputHandler}
           ref={emailRef}
           className={`${emailError ? "p-invalid" : ""}`}
-          autoComplete={false}
+          autoComplete="off"
         />
         <label htmlFor="email">Email id</label>
       </div>

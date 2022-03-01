@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { InputTextarea } from "primereact/inputtextarea";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 
-const ResultCard = ({ data, name, sign, resultRef, formRef, setData }) => {
+const ResultCard = ({
+  data,
+  name,
+  sign,
+  resultRef,
+  formRef,
+  setData,
+  email,
+  day,
+}) => {
   //   console.log(data.current_date);
 
   const navigationHandler = () => {
     resultRef.current.className = "general-card";
     formRef.current.className = "general-card";
     setData(null);
+    localStorage.clear();
   };
+
+  useEffect(() => {
+    localStorage.setItem("name", name);
+    localStorage.setItem("current_date", data.current_date);
+    localStorage.setItem("description", data.description);
+    localStorage.setItem("sign", sign);
+    localStorage.setItem("compatible", data.compatibility);
+    localStorage.setItem("email", email);
+    localStorage.setItem("day", day);
+  }, []);
 
   return (
     <div

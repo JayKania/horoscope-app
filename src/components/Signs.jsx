@@ -1,6 +1,12 @@
 import { createRef, useRef, useState } from "react";
 
-const Signs = ({ signs, setSigns, setSelectedSign, setSignsError }) => {
+const Signs = ({
+  signs,
+  setSigns,
+  setSelectedSign,
+  setSignsError,
+  selectedSign,
+}) => {
   const signRefs = useRef([]);
 
   signRefs.current = signs.map((_, i) => signRefs.current[i] ?? createRef());
