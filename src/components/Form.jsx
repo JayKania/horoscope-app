@@ -1,6 +1,8 @@
 import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 import React, { useRef, useState } from "react";
 import Signs from "./Signs";
+import axios from "axios";
 
 import aquarius from "../assets/aquarius.png";
 import aries from "../assets/aries.png";
@@ -15,7 +17,10 @@ import scorpio from "../assets/scorpio.png";
 import taurus from "../assets/taurus.png";
 import virgo from "../assets/virgo.png";
 
+import zodiac from "../assets/zodiac.png";
+
 const Form = () => {
+  //state
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [day, setDay] = useState("");
@@ -33,16 +38,23 @@ const Form = () => {
     { name: "taurus", logo: taurus, active: false },
     { name: "virgo", logo: virgo, active: false },
   ]);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
   const [selectedSign, setSelectedSign] = useState("");
-  const [userError, setUserError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [dayError, setDayError] = useState("");
-  const [signsError, setSignsError] = useState("");
+
+  // errors
+  const [userError, setUserError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [dayError, setDayError] = useState(false);
+  const [signsError, setSignsError] = useState(false);
+  // refs
   const yesterdayRef = useRef();
   const todayRef = useRef();
   const tomorrowRef = useRef();
   const userRef = useRef();
   const emailRef = useRef();
+
+  // https://divineapi.com/api/1.0/get_daily_horoscope.php/?api_key=42e7aaa88b48137a16a1acd04ed91125&date=2022-03-01&sign=aries&timezone=5.5
 
   const inputHandler = (event) => {
     if (event.target.id === "username") {
@@ -58,16 +70,43 @@ const Form = () => {
     event.preventDefault();
     if (!userRef.current.value) {
       setUserError(true);
-    }
-    if (!validateEmail(emailRef.current.value)) {
-      setEmailError(true);
+      return;
     }
     if (!day) {
       setDayError(true);
+      return;
+    }
+    if (!validateEmail(emailRef.current.value)) {
+      setEmailError(true);
+      return;
     }
     if (!selectedSign) {
       setSignsError(true);
+      return;
     }
+    setLoading(true);
+    console.log(selectedSign);
+    console.log(day);
+    const options = {
+      method: "POST",
+      url: "https://sameer-kumar-aztro-v1.p.rapidapi.com/",
+      params: { sign: selectedSign, day: day },
+      headers: {
+        "x-rapidapi-host": "sameer-kumar-aztro-v1.p.rapidapi.com",
+        "x-rapidapi-key": "cb04818fb7msh1314b7e7a7a63adp1e6b6bjsn29cfcdd861aa",
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   };
 
   const dayHandler = (event) => {
@@ -99,8 +138,11 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <h2>Find your Horoscope</h2>
+    <form onSubmit={submitHandler} className={`${data ? "active" : null}`}>
+      <header>
+        <h2>Find your Horoscope</h2>
+        <img src={zodiac} alt="" />
+      </header>
       <div className="p-float-label input-text">
         <InputText
           id="username"
@@ -147,9 +189,7 @@ const Form = () => {
       {signsError ? (
         <div className="signs-err">Please select a sign.</div>
       ) : null}
-      <div className="submit">
-        <input type="submit" />
-      </div>
+      <Button label="Submit" loading={loading ? true : false} />
     </form>
   );
 };
